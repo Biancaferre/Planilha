@@ -1,0 +1,8 @@
+GET https://3000-vitorvanacor-planilha-xa8o20iz4kw.ws-us62.gitpod.io/transacoes
+###
+
+POST https://3000-vitorvanacor-planilha-xa8o20iz4kw.ws-us62.gitpod.io/transacoes
+Content-Type:  application/json
+Meu-Header:"kghkgg"
+
+{"valor":"10"}
