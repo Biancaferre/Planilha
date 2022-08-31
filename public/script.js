@@ -41,16 +41,15 @@ function setTransacoes(transacoes) {
   document.getElementById('lista-transacoes-conteudo').replaceWith(tabelaConteudo);
 }
 
-async function buscarTransacoes() { 
-
+async function buscarTransacoes() {
   const response = await fetch('https://run.mocky.io/v3/ba2007f7-04ea-465b-985e-b16c11e8061d');
   const financas = await response.json();
   
-  //setSaldo(financas.saldo); 
+  setSaldo(financas.saldo);
   setTransacoes(financas.transacoes);
 }
 
-async function enviarDadosTransacao(descricao, valor,categoria) {
+async function enviarDadosTransacao(descricao, valor) {
   if (valor.indexOf(',') > 0) {
     alert('Você deve digitar números com o símbolo decimal ponto, e não vírgula');
     return;
@@ -61,23 +60,20 @@ async function enviarDadosTransacao(descricao, valor,categoria) {
     return;
   }
   
-  const transacao = { descricao, valor: Number(valor),categoria };
-  console.log('transacao ' + JSON.stringify(transacao))
+  const transacao = { descricao, valor: Number(valor) };
+  
   const requisicao = {
     method: 'POST',
     body: JSON.stringify(transacao),
-    Headers: {
-        "content-type": "application/json"
-    }
   };
-  await fetch('/transacoes', requisicao);
+  await fetch('https://run.mocky.io/v3/c50981e7-1c9b-471c-9128-3adf362cf36f', requisicao);
 }
 
 async function adicionarDespesa() {
   const descricaoDespesa = window.prompt('Qual a descricao de sua despesa?');
   const valorDespesa = window.prompt('Qual o valor de sua despesa?');
 
-  await enviarDadosTransacao(descricaoDespesa, valorDespesa,"Despesa");
+  await enviarDadosTransacao(descricaoDespesa, valorDespesa);
   
   buscarTransacoes();
 }
